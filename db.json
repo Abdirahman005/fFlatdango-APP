@@ -1,0 +1,22 @@
+{
+    "movies": [
+      {
+        "id": 1,
+        "title": "Inception",
+        "description": "A mind-bending thriller",
+        "poster": "inception.jpg",
+        "showtime": "7:00 PM",
+        "tickets_sold": 50,
+        "tickets_available": 100
+      },
+      {
+        "id": 2,
+        "title": "Interstellar",
+        "description": "A journey through space and time",
+        "poster": "interstellar.jpg",
+        "showtime": "9:00 PM",
+        "tickets_sold": 30,
+        "tickets_available": 70
+      }
+    ]
+  }
