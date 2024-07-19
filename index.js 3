@@ -1,0 +1,48 @@
+ document.addEventListener('DOMContentLoaded', () => {
+    const moviesList = document.getElementById('movies-list');
+    const movieDetails = document.getElementById('movie-details');
+
+    // Fetch movies from local JSON server
+    fetch('http://localhost:3000/movies')
+        .then(response => response.json())
+        .then(movies => {
+            movies.forEach(movie => {
+                const movieItem = document.createElement('div');
+                movieItem.textContent = movie.title;
+                movieItem.addEventListener('click', () => showMovieDetails(movie));
+                moviesList.appendChild(movieItem);
+            });
+        });
+
+    function showMovieDetails(movie) {
+        movieDetails.innerHTML = `
+            <h2>${movie.title}</h2>
+            <p>${movie.description}</p>
+            <p>Showtime: ${movie.showtime}</p>
+            <p>Tickets Available: ${movie.tickets_available}</p>
+            <button id="buy-ticket">Buy Ticket</button>
+        `;
+        document.getElementById('buy-ticket').addEventListener('click', () => buyTicket(movie));
+    }
+
+    function buyTicket(movie) {
+        if (movie.tickets_available > 0) {
+            movie.tickets_available--;
+
+            // Update movie data on the server
+            fetch(http://localhost:3000/movies/${movie.id}, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ tickets_available: movie.tickets_available })
+            })
+            .then(response => response.json())
+            .then(updatedMovie => {
+                showMovieDetails(updatedMovie);
+            });
+        } else {
+            alert('No more tickets available');
+        }
+    }
+});
